@@ -121,7 +121,7 @@ Meal-Planner/
 
 ## 📖 Documentação & Relatório
 
-- Toda a informação detalhada sobre o desenho, funcionalidades, código SQL, modelos, manual de utilização e validação está disponível no [Relatório Final - MealPlanner.pdf](link_para_o_relatorio) (anexar PDF ao repositório).
+- Toda a informação detalhada sobre o desenho, funcionalidades, código SQL, modelos, manual de utilização e validação está disponível no Relatório Final - MealPlanner.pdf.
 - Inclui diagramas ER, tabelas, exemplos de rotas, modelos SQLAlchemy e templates HTML.
 
 ---
