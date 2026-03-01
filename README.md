@@ -132,6 +132,15 @@ A robustez do **Meal Planner** é garantida por uma suite de testes automatizado
 * **Mocking:** Uso de `client` fixture para simulação de pedidos HTTP.
 * **Isolamento:** Base de dados SQLite em memória para testes ultra-rápidos e limpos.
 
+## 🧪 Engenharia de Qualidade (QA)
+
+A robustez do sistema é garantida por **31 testes automatizados** (unitários e de integração) desenvolvidos com `pytest`.
+
+### 🖥️ Como executar os testes
+Para validar a aplicação localmente, use o comando:
+```bash
+pytest -v
+
 ## 📖 Documentação e Relatório
 
 O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
