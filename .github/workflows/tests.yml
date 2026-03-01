@@ -20,6 +20,8 @@ jobs:
           pip install pytest pytest-cov
 
       - name: Run tests with coverage
+        env:
+          PYTHONPATH: .
         run: |
           pytest --cov=app tests/ --cov-report=xml
 
