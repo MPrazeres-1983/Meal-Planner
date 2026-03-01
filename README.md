@@ -132,11 +132,6 @@ A robustez do **Meal Planner** é garantida por uma suite de testes automatizado
 * **Mocking:** Uso de `client` fixture para simulação de pedidos HTTP.
 * **Isolamento:** Base de dados SQLite em memória para testes ultra-rápidos e limpos.
 
-### 🖥️ Execução e Resultados
-Para correr a suite de testes localmente:
-```bash
-pytest -v --color=yes
-
 ## 📖 Documentação e Relatório
 
 O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
