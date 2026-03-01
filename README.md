@@ -138,9 +138,8 @@ A robustez do sistema é garantida por **31 testes automatizados** (unitários e
 
 ### 🖥️ Como executar os testes
 Para validar a aplicação localmente, use o comando:
-```bash
 pytest -v
-```bash
+
 ## 📖 Documentação e Relatório
 
 O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
