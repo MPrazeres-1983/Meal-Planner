@@ -153,17 +153,20 @@ tests/test_admin.py ......                                               [100%]
 
 ## 📖 Documentação e Relatório
 
-O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial:
+O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
 
-👉 [**Descarregar Relatório Final (PDF)**](https://github.com/MPrazeres-1983/Meal-Planner/blob/main/docs/Relatorio_Final_MealPlanner.pdf)
+👉 [**Visualizar Relatório Final (PDF)**](./docs/Relatorio_Final_MealPlanner.pdf)
 
 ---
 
 ## 👥 Autores
 
-- [Mário Prazeres](https://github.com/MPrazeres-1983)
-- [Matilde Carmo](https://github.com/luniballony)
+| Nome | GitHub |
+| :--- | :--- |
+| **Mário Prazeres** | [@MPrazeres-1983](https://github.com/MPrazeres-1983) |
+| **Matilde Carmo** | [@luniballony](https://github.com/luniballony) |
 
+---
 Agradecimentos ao Professor Pedro Pestana pelo acompanhamento e sugestões ao longo do projeto.
 
 ---
@@ -174,9 +177,12 @@ Projeto académico. Uso livre para fins de aprendizagem. Para outros usos, conta
 
 ---
 
-## 📬 Contacto
+## 📬 Contacto e Suporte
 
-Sugestões, bugs ou questões: [Abrir um Issue](https://github.com/luniballony/Meal-Planner/issues) ou contactar via GitHub.
+Sugestões, bugs ou questões técnicas:
+
+* 🛠️ **Issues:** [Abrir um novo Issue](https://github.com/MPrazeres-1983/Meal-Planner/issues)
+* 📧 **Mário Prazeres:** Via perfil do GitHub
 
 ---
 
