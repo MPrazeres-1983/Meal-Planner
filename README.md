@@ -137,20 +137,6 @@ Para correr a suite de testes localmente:
 ```bash
 pytest -v --color=yes
 
-============================= test session starts =============================
-platform win32 -- Python 3.13.x -- pytest-8.3.x
-rootdir: C:/Dev/Projetos/Meal-Planner
-collected 31 items
-
-tests/test_auth.py ........                                              [ 25%]
-tests/test_recipes.py ..........                                         [ 58%]
-tests/test_meal_plans.py .......                                         [ 80%]
-tests/test_admin.py ......                                               [100%]
-
-============================== 31 passed in 4.12s =============================
-
----
-
 ## 📖 Documentação e Relatório
 
 O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
