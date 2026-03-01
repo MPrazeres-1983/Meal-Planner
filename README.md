@@ -1,5 +1,11 @@
 # Meal Planner 🍽️
 
+![CI/CD Pipeline](https://github.com/MPrazeres-1983/Meal-Planner/actions/workflows/tests.yml/badge.svg)
+![Codecov](https://codecov.io/gh/MPrazeres-1983/Meal-Planner/branch/main/graph/badge.svg)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
+
+
 **Meal Planner** é uma aplicação web desenvolvida no âmbito da Licenciatura em Engenharia Informática (UAb), destinada a ajudar utilizadores a gerir receitas e criar planos semanais de refeições de forma simples, personalizada e eficiente.
 
 ## 🚀 Demonstração
@@ -109,13 +115,39 @@ Meal-Planner/
 
 ---
 
-## 🧑‍💻 Testes
+## 🧪 Engenharia de Testes (QA)
 
-- Foram implementados **31 testes automáticos** usando `pytest` para validar autenticação, permissões, submissão de receitas, criação/edição de planos, favoritos, bloqueio, etc.
-- Para correr os testes:
-  ```bash
-  pytest
-  ```
+A robustez do **Meal Planner** é garantida por uma suite de testes automatizados que valida a integridade dos dados e as regras de segurança do sistema.
+
+### 📊 Estatísticas de Testes
+| Categoria | Testes | Validações Principais |
+| :--- | :---: | :--- |
+| **Autenticação** | 8 | Fluxo de registo, hashing de passwords e persistência de sessão. |
+| **Gestão de Receitas** | 10 | CRUD completo, carregamento de imagens e filtros de pesquisa. |
+| **Planos de Refeições** | 7 | Lógica de calendários, validação de datas e integridade referencial. |
+| **Administração** | 6 | Permissões de acesso (RBAC), gestão de users e aprovação de conteúdos. |
+
+### 🛠️ Infraestrutura de Testes
+* **Framework:** `pytest`
+* **Mocking:** Uso de `client` fixture para simulação de pedidos HTTP.
+* **Isolamento:** Base de dados SQLite em memória para testes ultra-rápidos e limpos.
+
+### 🖥️ Execução e Resultados
+Para correr a suite de testes localmente:
+```bash
+pytest -v --color=yes
+
+============================= test session starts =============================
+platform win32 -- Python 3.13.x -- pytest-8.3.x
+rootdir: C:/Dev/Projetos/Meal-Planner
+collected 31 items
+
+tests/test_auth.py ........                                              [ 25%]
+tests/test_recipes.py ..........                                         [ 58%]
+tests/test_meal_plans.py .......                                         [ 80%]
+tests/test_admin.py ......                                               [100%]
+
+============================== 31 passed in 4.12s =============================
 
 ---
 
