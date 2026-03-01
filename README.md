@@ -4,8 +4,8 @@
 
 ## 🚀 Demonstração
 
-- **Versão online**: [web-production-4e3b6.up.railway.app](https://web-production-4e3b6.up.railway.app)
-- **Repositório GitHub**: [github.com/luniballony/Meal-Planner](https://github.com/luniballony/Meal-Planner)
+* **Versão Online:** [https://meal-planner-8zsa.onrender.com](https://meal-planner-8zsa.onrender.com)
+* **Repositório Oficial:** [https://github.com/MPrazeres-1983/Meal-Planner](https://github.com/MPrazeres-1983/Meal-Planner)
 
 ---
 
@@ -119,10 +119,11 @@ Meal-Planner/
 
 ---
 
-## 📖 Documentação & Relatório
+## 📖 Documentação e Relatório
 
-- Toda a informação detalhada sobre o desenho, funcionalidades, código SQL, modelos, manual de utilização e validação está disponível no Relatório Final - MealPlanner.pdf.
-- Inclui diagramas ER, tabelas, exemplos de rotas, modelos SQLAlchemy e templates HTML.
+O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial:
+
+👉 [**Descarregar Relatório Final (PDF)**](https://github.com/MPrazeres-1983/Meal-Planner/blob/main/docs/Relatorio_Final_MealPlanner.pdf)
 
 ---
 
