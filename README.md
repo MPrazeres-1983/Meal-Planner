@@ -5,49 +5,74 @@
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 ![Python](https://img.shields.io/badge/python-3.13+-blue.svg)
 
+**Meal Planner** is a full-stack web application for recipe management and weekly meal planning, developed as the final project of the Computer Engineering degree at Universidade Aberta.
 
-**Meal Planner** é uma aplicação web desenvolvida no âmbito da Licenciatura em Engenharia Informática (UAb), destinada a ajudar utilizadores a gerir receitas e criar planos semanais de refeições de forma simples, personalizada e eficiente.
-
-## 🚀 Demonstração
-
-* **Versão Online:** [https://meal-planner-8zsa.onrender.com](https://meal-planner-8zsa.onrender.com)
-* **Repositório Oficial:** [https://github.com/MPrazeres-1983/Meal-Planner](https://github.com/MPrazeres-1983/Meal-Planner)
+The project received a final grade of **19/20** and focuses on user authentication, role-based access control, recipe workflows, weekly planning, administration features and automated testing.
 
 ---
 
-## 📋 Funcionalidades Principais
+## 🚀 Live Demo
 
-- Registo e autenticação segura de utilizadores
-- Pesquisa de receitas com filtros (categoria, tempo, etc.)
-- Submissão de receitas públicas e privadas
-- Criação, edição, visualização e eliminação de planos semanais (pequeno-almoço, almoço, jantar)
-- Gestão de receitas favoritas e receitas bloqueadas
-- Exportação de planos para PDF (apenas disponível localmente)
-- Painel de administração:
-  - Aprovação/recusa de receitas submetidas
-  - Gestão de utilizadores (bloquear, editar, alterar nível, eliminar)
-  - Gestão de categorias (criar, editar, eliminar)
-- Diferenciação de perfis: utilizador comum, premium e administrador
+- **Online version:** [https://meal-planner-8zsa.onrender.com](https://meal-planner-8zsa.onrender.com)
+- **Official repository:** [https://github.com/MPrazeres-1983/Meal-Planner](https://github.com/MPrazeres-1983/Meal-Planner)
+
+> The application is hosted on Render. If the service has been idle, the first request may take a few seconds to wake up.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## 📋 Main Features
 
-- **Backend:** Python, Flask
-- **Frontend:** HTML, CSS, Jinja2
-- **Base de Dados:** PostgreSQL (alojada na Railway)
-- **ORM:** SQLAlchemy
-- **Validação de formulários:** WTForms
-- **Segurança:** Werkzeug para hashing seguro de passwords
-- **Controlo de versões:** Git & GitHub
-- **Ambiente de desenvolvimento:** VS Code
-- **Alojamento:** Railway
+### User Features
+
+- User registration and authentication.
+- Recipe search with filters.
+- Public and private recipe submission.
+- Weekly meal planning for breakfast, lunch and dinner.
+- Create, edit, view and delete weekly meal plans.
+- Favourite recipes.
+- Blocked recipes.
+- PDF export for meal plans, available locally.
+
+### Administration Features
+
+- Approve or reject submitted recipes.
+- Manage users.
+- Block users.
+- Edit user data.
+- Change user role or level.
+- Delete users.
+- Manage recipe categories.
+- Create, edit and delete categories.
+
+### User Roles
+
+- Standard user.
+- Premium user.
+- Administrator.
 
 ---
 
-## 📦 Estrutura do Projeto
+## 🛠️ Tech Stack
 
-```shell
+| Area | Technology |
+| ---- | ---------- |
+| Backend | Python, Flask |
+| Frontend | HTML, CSS, Jinja2 |
+| Database | PostgreSQL in production, SQLite for local/test usage |
+| ORM | SQLAlchemy |
+| Forms | WTForms |
+| Security | Werkzeug password hashing |
+| Testing | pytest |
+| CI/CD | GitHub Actions |
+| Coverage | Codecov |
+| Deployment | Render |
+| Version Control | Git, GitHub |
+
+---
+
+## 🏗️ Project Structure
+
+```text
 Meal-Planner/
 ├── app/
 │   ├── __init__.py
@@ -58,8 +83,9 @@ Meal-Planner/
 │   ├── services/
 │   ├── static/
 │   └── templates/
+├── docs/
+│   └── Relatorio_Final_MealPlanner.pdf
 ├── instance/
-│   └── mealplanner.db
 ├── requirements.txt
 ├── config.py
 ├── run.py
@@ -68,111 +94,145 @@ Meal-Planner/
 └── README.md
 ```
 
-> Ver estrutura completa e exemplos no relatório/anexos.
+---
+
+## ⚙️ Local Installation
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/MPrazeres-1983/Meal-Planner.git
+cd Meal-Planner
+```
+
+### 2. Create and activate a virtual environment
+
+```bash
+python -m venv venv
+```
+
+Linux/macOS:
+
+```bash
+source venv/bin/activate
+```
+
+Windows:
+
+```bash
+venv\Scripts\activate
+```
+
+### 3. Install dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Configure environment variables
+
+Create a `.env` file in the repository root.
+
+```env
+FLASK_ENV=development
+DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
+SECRET_KEY=change-this-secret-locally
+```
+
+For a simple local setup, you can adapt the configuration to use SQLite.
+
+### 5. Run the application
+
+```bash
+flask run
+```
+
+The application should be available at:
+
+```text
+http://127.0.0.1:5000
+```
 
 ---
 
-## ⚙️ Instalação Local
+## 🧪 Testing & Quality
 
-1. **Clonar o repositório:**
+The project includes **31 automated tests** built with `pytest`.
 
-   ```bash
-   git clone https://github.com/luniballony/Meal-Planner.git
-   cd Meal-Planner
-   ```
+The test suite validates the main functional and security-related areas of the application.
 
-2. **Criar e ativar um ambiente virtual:**
+| Area | Tests | Main Validation Points |
+| ---- | ----: | ---------------------- |
+| Authentication | 8 | Registration flow, password hashing and session persistence |
+| Recipe Management | 10 | CRUD operations, image upload and search filters |
+| Meal Plans | 7 | Weekly planning logic, date validation and referential integrity |
+| Administration | 6 | Role-based access control, user management and content approval |
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate    # Linux/Mac
-   .\venv\Scripts\activate     # Windows
-   ```
+### Testing Infrastructure
 
-3. **Instalar as dependências:**
+- **Framework:** pytest.
+- **HTTP simulation:** Flask test client.
+- **Isolation:** SQLite in-memory database for fast and repeatable tests.
+- **CI:** GitHub Actions.
+- **Coverage:** Codecov.
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Run tests locally
 
-4. **Configurar variáveis de ambiente** (criar `.env`):
-
-   ```env
-   FLASK_ENV=development
-   DATABASE_URL=postgresql://<utilizador>:<senha>@<host>:<porta>/<dbname>
-   SECRET_KEY=uma-chave-aleatoria
-   ```
-
-5. **Criar e migrar a base de dados:**
-
-   - O projeto já inclui scripts para criação e seed da base de dados.
-   - Edita a ligação no `config.py` se necessário.
-
-6. **Correr a aplicação:**
-   ```bash
-   flask run
-   ```
-
----
-
-## 🧪 Engenharia de Testes (QA)
-
-A robustez do **Meal Planner** é garantida por uma suite de testes automatizados que valida a integridade dos dados e as regras de segurança do sistema.
-
-### 📊 Estatísticas de Testes
-| Categoria | Testes | Validações Principais |
-| :--- | :---: | :--- |
-| **Autenticação** | 8 | Fluxo de registo, hashing de passwords e persistência de sessão. |
-| **Gestão de Receitas** | 10 | CRUD completo, carregamento de imagens e filtros de pesquisa. |
-| **Planos de Refeições** | 7 | Lógica de calendários, validação de datas e integridade referencial. |
-| **Administração** | 6 | Permissões de acesso (RBAC), gestão de users e aprovação de conteúdos. |
-
-### 🛠️ Infraestrutura de Testes
-* **Framework:** `pytest`
-* **Mocking:** Uso de `client` fixture para simulação de pedidos HTTP.
-* **Isolamento:** Base de dados SQLite em memória para testes ultra-rápidos e limpos.
-
-## 🧪 Engenharia de Qualidade (QA)
-
-A robustez do sistema é garantida por **31 testes automatizados** (unitários e de integração) desenvolvidos com `pytest`.
-
-### 🖥️ Como executar os testes
-Para validar a aplicação localmente, use o comando:
+```bash
 pytest -v
+```
 
-## 📖 Documentação e Relatório
+Run tests with coverage:
 
-O desenvolvimento detalhado, incluindo diagramas Entidade-Relacionamento, modelos de dados e manual de utilizador, pode ser consultado no relatório oficial da licenciatura:
-
-👉 [**Visualizar Relatório Final (PDF)**](./docs/Relatorio_Final_MealPlanner.pdf)
+```bash
+pytest --cov=app --cov-report=term-missing
+```
 
 ---
 
-## 👥 Autores
+## 🔐 Quality and Security Focus
 
-| Nome | GitHub |
-| :--- | :--- |
+This project includes several quality and security concerns relevant to real-world web applications:
+
+- Authentication and session handling.
+- Password hashing.
+- Role-based access control.
+- Admin-only routes.
+- User-generated content approval.
+- Data validation through forms.
+- Separation of routes, models, forms and services.
+- Automated regression checks through the test suite.
+
+---
+
+## 📖 Documentation and Final Report
+
+The complete academic report includes the project context, requirements, entity-relationship diagrams, data models, implementation details and user manual.
+
+👉 [View Final Report PDF](./docs/Relatorio_Final_MealPlanner.pdf)
+
+---
+
+## 👥 Authors
+
+| Name | GitHub |
+| ---- | ------ |
 | **Mário Prazeres** | [@MPrazeres-1983](https://github.com/MPrazeres-1983) |
 | **Matilde Carmo** | [@luniballony](https://github.com/luniballony) |
 
----
-Agradecimentos ao Professor Pedro Pestana pelo acompanhamento e sugestões ao longo do projeto.
+Special thanks to Professor Pedro Pestana for the guidance and feedback throughout the project.
 
 ---
 
-## 📄 Licença
+## 📬 Contact and Support
 
-Projeto académico. Uso livre para fins de aprendizagem. Para outros usos, contactar os autores.
+For suggestions, bugs or technical questions:
 
----
-
-## 📬 Contacto e Suporte
-
-Sugestões, bugs ou questões técnicas:
-
-* 🛠️ **Issues:** [Abrir um novo Issue](https://github.com/MPrazeres-1983/Meal-Planner/issues)
-* 📧 **Mário Prazeres:** Via perfil do GitHub
+- [Open an issue](https://github.com/MPrazeres-1983/Meal-Planner/issues)
+- Contact Mário Prazeres through GitHub or LinkedIn.
 
 ---
 
-> “Planeia a tua semana. Alimenta o teu sucesso!”
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
