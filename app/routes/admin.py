@@ -27,6 +27,13 @@ from app.forms.user_admin_form import EditarUserForm, ConfirmarAcaoForm
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
+@admin_bp.before_request
+def exigir_administrador():
+    if session.get("user_nivel") != 3:
+        flash("Acesso restrito a administradores.", "danger")
+        return redirect(url_for("main.home"))
+
+
 
 @admin_bp.route("/aprovar_receitas")
 def aprovar_receitas():
