@@ -45,7 +45,7 @@ def aprovar_receitas():
     return render_template("admin/aprovar_receitas.html", pendentes=pendentes)
 
 
-@admin_bp.route("/aprovar_receita/<int:receita_id>")
+@admin_bp.route("/aprovar_receita/<int:receita_id>", methods=["POST"])
 def aprovar_receita_admin(receita_id):
     if session.get("user_nivel") != 3:
         flash("Acesso restrito a administradores.", "danger")
@@ -60,7 +60,7 @@ def aprovar_receita_admin(receita_id):
     return redirect(url_for("admin.aprovar_receitas"))
 
 
-@admin_bp.route("/recusar_receita/<int:receita_id>")
+@admin_bp.route("/recusar_receita/<int:receita_id>", methods=["POST"])
 def recusar_receita_admin(receita_id):
     if session.get("user_nivel") != 3:
         flash("Acesso restrito a administradores.", "danger")
