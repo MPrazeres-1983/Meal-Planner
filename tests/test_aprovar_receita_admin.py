@@ -57,7 +57,7 @@ def test_aprovar_receita(client):
     """
     Aprova a receita 1 e verifica se a alteração foi efetuada.
     """
-    response = client.get("/admin/aprovar_receita/1", follow_redirects=True)
+    response = client.post("/admin/aprovar_receita/1", follow_redirects=True)
 
     assert response.status_code == 200
     assert "Receita aprovada com sucesso" in response.get_data(as_text=True)
