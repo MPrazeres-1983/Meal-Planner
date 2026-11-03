@@ -1,21 +1,26 @@
+"""Create a first administrator explicitly, using environment-provided credentials."""
+import os
 from app import create_app
 from app.db import db
 from app.models.user import User
 
-app = create_app()
 
-with app.app_context():
-    nome = "Admin"
-    email = "admin@mealplanner.com"
-    password = "admin123"
-
-    # Verificar se já existe
-    admin_existente = User.query.filter_by(email=email).first()
-    if admin_existente:
-        print("❌ Já existe um administrador com esse email.")
-    else:
-        admin = User(nome=nome, email=email, nivel=3)  # nível 3 = admin
+def main():
+    email = os.environ["ADMIN_EMAIL"]
+    password = os.environ["ADMIN_NEW_PASSWORD"]
+    nome = os.environ.get("ADMIN_NAME", "Admin")
+    if len(password) < 12:
+        raise ValueError("ADMIN_NEW_PASSWORD must contain at least 12 characters")
+    app = create_app()
+    with app.app_context():
+        if User.query.filter_by(email=email).first():
+            raise ValueError("Administrator email already exists")
+        admin = User(nome=nome, email=email, nivel=3)
         admin.set_password(password)
         db.session.add(admin)
         db.session.commit()
-        print("✅ Administrador criado com sucesso!")
+    print("Administrator created.")
+
+
+if __name__ == "__main__":
+    main()
