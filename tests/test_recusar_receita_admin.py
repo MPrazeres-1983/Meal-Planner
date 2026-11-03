@@ -58,7 +58,7 @@ def test_recusar_receita(client):
     """
     Testa a recusa (eliminação) da receita.
     """
-    response = client.get("/admin/recusar_receita/1", follow_redirects=True)
+    response = client.post("/admin/recusar_receita/1", follow_redirects=True)
 
     assert response.status_code == 200
     assert "Receita recusada (eliminada) com sucesso" in response.get_data(as_text=True)
