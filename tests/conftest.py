@@ -1,3 +1,6 @@
+import os
+os.environ.setdefault("SECRET_KEY", "test-only-key-unique-not-for-production-2026")
+
 import pytest
 from app import create_app, db
 
