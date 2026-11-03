@@ -22,6 +22,7 @@ jobs:
       - name: Run tests with coverage
         env:
           PYTHONPATH: .
+          SECRET_KEY: test-only-key-unique-not-for-production-2026
         run: |
           pytest --cov=app tests/ --cov-report=xml
 
