@@ -27,6 +27,31 @@ def create_app():
     csrf.init_app(app)
     db.init_app(app)
 
+    @app.before_request
+    def check_current_account():
+        """Reject invalidated sessions and refresh permissions from the DB."""
+        from flask import session, request, redirect, url_for
+        from app.models.user import User
+
+        user_id = session.get("user_id")
+        if user_id is None:
+            return None
+        user = db.session.get(User, user_id)
+        if user is None or not user.ativo:
+            session.clear()
+            # Logging in or viewing public pages must remain possible.
+            if request.endpoint and (
+                request.endpoint.startswith("auth.")
+                or request.endpoint == "static"
+            ):
+                return None
+            return redirect(url_for("auth.login"))
+
+        # The role cached in the signed cookie is not an authority.
+        session["user_nivel"] = user.nivel
+        session["user_nome"] = user.nome
+        return None
+
     # Registo dos blueprints
     app.register_blueprint(auth_bp)
     app.register_blueprint(recipes_bp)
