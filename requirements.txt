@@ -3,6 +3,7 @@ python-dotenv
 Flask-WTF
 Flask-SQLAlchemy
 psycopg2-binary>=2.9.10
+psycopg[binary]>=3.2
 gunicorn
 email-validator
 pdfkit
