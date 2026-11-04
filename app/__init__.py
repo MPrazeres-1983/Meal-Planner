@@ -21,6 +21,8 @@ csrf = CSRFProtect()
 def create_app():
     app = Flask(__name__)
     app.config.from_object("config.Config")
+    from config import Config
+    Config.init_app(app)
 
     csrf.init_app(app)
     db.init_app(app)

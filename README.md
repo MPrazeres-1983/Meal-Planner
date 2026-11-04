@@ -236,3 +236,10 @@ For suggestions, bugs or technical questions:
 ## 📄 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+
+## Operação segura (2026-11)
+
+As credenciais de administração e base de dados nunca devem existir no código. Definir `SECRET_KEY` (mínimo 32 caracteres), `DATABASE_URL`, e, só para as operações administrativas manuais, `ADMIN_EMAIL` e `ADMIN_NEW_PASSWORD` (mínimo 12 caracteres) no gestor de segredos do ambiente. O script `reset_admin.py` só deve ser executado manualmente e direciona a operação a um email administrativo.
+
+**Incidente de credenciais:** versões anteriores continham valores sensíveis no histórico Git. Remover o valor de um ficheiro ou fazer merge deste PR **não revoga** credenciais nem apaga commits antigos. Rodar a password da base PostgreSQL no fornecedor, atualizar o ambiente de deployment, revogar passwords administrativas previsíveis, verificar os logs de acesso, e avaliar a remoção dos segredos do histórico apenas depois de proceder à rotação, com plano de coordenação de clones/forks. Não executar scripts de administração contra produção sem cópia de segurança e autorização.

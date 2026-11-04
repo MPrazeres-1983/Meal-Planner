@@ -27,6 +27,13 @@ from app.forms.user_admin_form import EditarUserForm, ConfirmarAcaoForm
 
 admin_bp = Blueprint("admin", __name__, url_prefix="/admin")
 
+@admin_bp.before_request
+def exigir_administrador():
+    if session.get("user_nivel") != 3:
+        flash("Acesso restrito a administradores.", "danger")
+        return redirect(url_for("main.home"))
+
+
 
 @admin_bp.route("/aprovar_receitas")
 def aprovar_receitas():
@@ -38,7 +45,7 @@ def aprovar_receitas():
     return render_template("admin/aprovar_receitas.html", pendentes=pendentes)
 
 
-@admin_bp.route("/aprovar_receita/<int:receita_id>")
+@admin_bp.route("/aprovar_receita/<int:receita_id>", methods=["POST"])
 def aprovar_receita_admin(receita_id):
     if session.get("user_nivel") != 3:
         flash("Acesso restrito a administradores.", "danger")
@@ -53,7 +60,7 @@ def aprovar_receita_admin(receita_id):
     return redirect(url_for("admin.aprovar_receitas"))
 
 
-@admin_bp.route("/recusar_receita/<int:receita_id>")
+@admin_bp.route("/recusar_receita/<int:receita_id>", methods=["POST"])
 def recusar_receita_admin(receita_id):
     if session.get("user_nivel") != 3:
         flash("Acesso restrito a administradores.", "danger")

@@ -74,6 +74,8 @@ def meus_planos():
 
 @meal_plans_bp.route("/ver/<int:plano_id>")
 def ver(plano_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.login"))
     plano = obter_plano_completo(plano_id)
     if not plano or plano.utilizador_id != session["user_id"]:
         flash("Plano não encontrado.", "danger")
@@ -86,6 +88,16 @@ def ver(plano_id):
 
 @meal_plans_bp.route("/apagar/<int:plano_id>", methods=["POST"])
 def apagar_plano(plano_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.login"))
+    form = FormApagarPlano()
+    if not form.validate_on_submit():
+        flash("Pedido inválido.", "danger")
+        return redirect(url_for("meal_plans.meus_planos"))
+    plano = obter_plano_completo(plano_id)
+    if not plano or plano.utilizador_id != session["user_id"]:
+        flash("Plano não encontrado ou acesso negado.", "danger")
+        return redirect(url_for("meal_plans.meus_planos"))
     if eliminar_plano(plano_id):
         flash("Plano eliminado com sucesso.", "success")
     else:
@@ -95,6 +107,8 @@ def apagar_plano(plano_id):
 
 @meal_plans_bp.route("/editar/<int:plano_id>", methods=["GET", "POST"])
 def editar_plano(plano_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.login"))
     plano = obter_plano_completo(plano_id)
     if not plano or plano.utilizador_id != session["user_id"]:
         flash("Plano não encontrado ou acesso negado.", "danger")
@@ -165,6 +179,8 @@ def editar_plano(plano_id):
 
 @meal_plans_bp.route("/exportar_pdf/<int:plano_id>", endpoint="exportar_pdf")
 def exportar_pdf(plano_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.login"))
     plano = obter_plano_completo(plano_id)
     if not plano or plano.utilizador_id != session["user_id"]:
         flash("Plano não encontrado ou acesso negado.", "danger")
