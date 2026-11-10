@@ -1,13 +1,13 @@
+import os
 import sqlite3
 from sqlalchemy import create_engine, text
 
 # CONFIGURAÇÃO
 SQLITE_PATH = 'instance/mealplanner.db'
-POSTGRES_URL = "postgresql://neondb_owner:npg_z7KpcdZlW6Mr@ep-red-frost-abg4eerj-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require"
 
 def migrar():
     sqlite_conn = sqlite3.connect(SQLITE_PATH)
-    pg_engine = create_engine(POSTGRES_URL)
+    pg_engine = create_engine(os.environ["DATABASE_URL"])
     
     # ORDEM CRÍTICA: users e categories PRIMEIRO
     tables = ['users', 'categories', 'recipes', 'meal_plans', 'meal_entries']

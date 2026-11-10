@@ -136,7 +136,7 @@ Create a `.env` file in the repository root.
 ```env
 FLASK_ENV=development
 DATABASE_URL=postgresql://<user>:<password>@<host>:<port>/<database>
-SECRET_KEY=change-this-secret-locally
+SECRET_KEY=<valor-aleatorio-com-pelo-menos-32-caracteres>
 ```
 
 For a simple local setup, you can adapt the configuration to use SQLite.
@@ -241,5 +241,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Operação segura (2026-11)
 
 As credenciais de administração e base de dados nunca devem existir no código. Definir `SECRET_KEY` (mínimo 32 caracteres), `DATABASE_URL`, e, só para as operações administrativas manuais, `ADMIN_EMAIL` e `ADMIN_NEW_PASSWORD` (mínimo 12 caracteres) no gestor de segredos do ambiente. O script `reset_admin.py` só deve ser executado manualmente e direciona a operação a um email administrativo.
+
+Os testes criam uma base SQLite em memória e verificam a ligação efetiva antes de criar tabelas. Os scripts legados que criam utilizadores de demonstração exigem passwords individuais nas variáveis `SEED_PASSWORD_1`, `SEED_PASSWORD_3`, `SEED_PASSWORD_4` e, quando aplicável, `SEED_PASSWORD_5`; utiliza valores aleatórios diferentes, com pelo menos 12 caracteres. Os scripts de migração recebem a ligação através de `DATABASE_URL`.
 
 **Incidente de credenciais:** versões anteriores continham valores sensíveis no histórico Git. Remover o valor de um ficheiro ou fazer merge deste PR **não revoga** credenciais nem apaga commits antigos. Rodar a password da base PostgreSQL no fornecedor, atualizar o ambiente de deployment, revogar passwords administrativas previsíveis, verificar os logs de acesso, e avaliar a remoção dos segredos do histórico apenas depois de proceder à rotação, com plano de coordenação de clones/forks. Não executar scripts de administração contra produção sem cópia de segurança e autorização.

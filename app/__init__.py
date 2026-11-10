@@ -18,9 +18,11 @@ from app.routes.blocked import blocked_bp
 csrf = CSRFProtect()
 
 
-def create_app():
+def create_app(config_override=None):
     app = Flask(__name__)
     app.config.from_object("config.Config")
+    if config_override is not None:
+        app.config.update(config_override)
     from config import Config
     Config.init_app(app)
 

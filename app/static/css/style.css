@@ -681,6 +681,19 @@ footer {
   transition: background-color 0.2s;
 }
 
+.logout-form {
+  display: inline;
+  margin: 0;
+}
+
+.nav-logout {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+
 .nav-item:hover {
   background-color: rgba(76, 175, 80, 0.1);
 }

@@ -7,20 +7,24 @@ from app import create_app, db
 
 @pytest.fixture
 def client():
-    app = create_app()
-    app.config["TESTING"] = True
-    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///:memory:"
-    app.config["WTF_CSRF_ENABLED"] = False
-
-    assert (
-        "sqlite" in app.config["SQLALCHEMY_DATABASE_URI"]
-    ), "NUNCA correr testes na base de dados de produção!"
+    app = create_app({
+        "TESTING": True,
+        "SECRET_KEY": "test-only-key-unique-not-for-production-2026",
+        "WTF_CSRF_SECRET_KEY": "test-only-csrf-unique-not-for-production-2026",
+        "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+        "SQLALCHEMY_BINDS": {},
+        "WTF_CSRF_ENABLED": False,
+    })
 
     with app.app_context():
-        db.drop_all()
+        # Verify the initialized engines, not merely the configuration string.
+        if (set(db.engines) != {None}
+                or db.engine.url.get_backend_name() != "sqlite"
+                or db.engine.url.database != ":memory:"):
+            raise RuntimeError("Test database must be an isolated in-memory SQLite database")
         db.create_all()
-        yield app.test_client()  # O client é o cliente de teste do Flask
-
-        # Opcional: limpar BD no fim (para SQLite em memória não é obrigatório)
-        db.session.remove()
-        db.drop_all()
+        try:
+            yield app.test_client()
+        finally:
+            db.session.remove()
+            db.engine.dispose()

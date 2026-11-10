@@ -1,10 +1,8 @@
+import os
 import sqlite3
 from sqlalchemy import create_engine, text
 
-# 1. Configurações - COLOCA A TUA STRING DO NEON AQUI
-# Altera esta linha no topo do teu migrate_data.py
 SQLITE_DB = 'instance/mealplanner.db'
-POSTGRES_URL = 'postgresql://neondb_owner:npg_z7KpcdZlW6Mr@ep-red-frost-abg4eerj-pooler.eu-west-2.aws.neon.tech/neondb?sslmode=require'
 
 def migrate():
     # Ligar ao SQLite (Origem)
@@ -12,7 +10,7 @@ def migrate():
     sqlite_cursor = sqlite_conn.cursor()
     
     # Ligar ao Postgres (Destino)
-    pg_engine = create_engine(POSTGRES_URL)
+    pg_engine = create_engine(os.environ["DATABASE_URL"])
     
     # Lista de tabelas para migrar (na ordem certa para evitar erros de chaves estrangeiras)
     tables = ['users', 'categories', 'recipes', 'meal_plans', 'meal_entries', 'favorites']
@@ -54,6 +52,7 @@ def migrate():
                             row_dict[key] = True
                         elif row_dict[key] == 0:
                             row_dict[key] = False
+                pg_conn.execute(insert_query, row_dict)
                 
             print(f"  ✅ {len(rows)} linhas migradas com sucesso.")
 

@@ -4,6 +4,8 @@ test_logout.py
 Testa se o logout limpa a sessão e redireciona corretamente.
 """
 
+import re
+
 import pytest
 from app.models.user import User
 from app import db
@@ -38,7 +40,26 @@ def test_logout(client):
     )
 
     # Fazer logout
-    response = client.get("/auth/logout", follow_redirects=True)
+    response = client.post("/auth/logout", follow_redirects=True)
 
     assert response.status_code == 200
     assert "Sessão terminada" in response.get_data(as_text=True)
+
+
+def test_logout_requires_post_and_csrf(client):
+    with client.application.app_context():
+        user_id = User.query.filter_by(email="teste@email.com").one().id
+    with client.session_transaction() as session:
+        session["user_id"] = user_id
+
+    client.application.config["WTF_CSRF_ENABLED"] = True
+    assert client.get("/auth/logout").status_code == 405
+    assert client.post("/auth/logout").status_code == 400
+    with client.session_transaction() as session:
+        assert session["user_id"] == user_id
+
+    page = client.get("/home").get_data(as_text=True)
+    token = re.search(r'name="csrf_token" value="([^"]+)"', page).group(1)
+    assert client.post("/auth/logout", data={"csrf_token": token}).status_code == 302
+    with client.session_transaction() as session:
+        assert "user_id" not in session
