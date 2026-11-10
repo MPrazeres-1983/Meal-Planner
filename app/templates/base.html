@@ -107,12 +107,12 @@
                 <i class="fas fa-user"></i> Perfil
               </a>
 
-              <a
-                href="{{ url_for('auth.logout') }}"
-                class="nav-item {% if request.endpoint == 'main.logout' %}active{% endif %}"
-              >
-                <i class="fas fa-sign-out-alt"></i> Logout
-              </a>
+              <form action="{{ url_for('auth.logout') }}" method="post" class="logout-form">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+                <button type="submit" class="nav-item nav-logout">
+                  <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+              </form>
             </div>
             {% else %}
             <div class="nav-menu">

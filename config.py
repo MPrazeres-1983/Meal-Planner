@@ -14,5 +14,8 @@ class Config:
 
     @classmethod
     def init_app(cls, app):
-        if not cls.SECRET_KEY or len(cls.SECRET_KEY) < 32:
+        secret_key = app.config.get("SECRET_KEY")
+        if not secret_key or len(secret_key) < 32:
             raise RuntimeError("Set SECRET_KEY to a strong value of at least 32 characters")
+        if os.getenv("RENDER") and not os.getenv("DATABASE_URL") and not app.testing:
+            raise RuntimeError("DATABASE_URL is required on Render")

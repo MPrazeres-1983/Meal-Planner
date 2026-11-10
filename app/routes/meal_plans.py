@@ -136,31 +136,18 @@ def editar_plano(plano_id):
         grelha_editar.append(linha)
 
     if request.method == "POST" and form.validate():
-        print("==== request.form ====")
-        print(request.form)
-
         refeicoes_selecionadas = {}
         for chave, receita_id in request.form.items():
-            print(f"Processando campo: {chave} = {receita_id}")
             if chave in ["csrf_token", "data_inicio"] or receita_id == "":
                 continue
             if "-" not in chave:
-                print(f"Campo ignorado (sem hífen): {chave}")
                 continue
             try:
-                data_str, refeicao = chave.rsplit("-", 1)  # <-- USAR rsplit!
-                print(f"data_str: {data_str} | refeicao: {refeicao}")
+                data_str, refeicao = chave.rsplit("-", 1)
                 data_refeicao = datetime.strptime(data_str, "%Y-%m-%d").date()
-                print(f"data_refeicao convertido: {data_refeicao}")
-
                 refeicoes_selecionadas[(data_refeicao, refeicao)] = int(receita_id)
-                print(f"Guardado: ({data_refeicao}, {refeicao}): {receita_id}")
-            except Exception as e:
-                print(f"Erro ao processar campo {chave}: {e}")
+            except (TypeError, ValueError):
                 continue
-
-        print("==== refeicoes_selecionadas ====")
-        print(refeicoes_selecionadas)
 
         atualizar_plano_semanal(plano, form.data_inicio.data, refeicoes_selecionadas)
         flash("Plano atualizado com sucesso.", "success")
